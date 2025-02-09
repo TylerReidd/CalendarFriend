@@ -1,0 +1,8 @@
+Make sure you have Node Package Manager or NPM installed.
+
+NPM was setup in the "Server" folder.
+
+We did this already, no need to do this:
+
+npm install mongodb
+npm install express

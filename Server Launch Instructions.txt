@@ -1,0 +1,7 @@
+For Windows:
+
+1) Open Command Prompt
+
+2) cd "Server" FolderLocation
+
+3) node server.js

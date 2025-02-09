@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="Styles.css">
+</head>
+
+<body>
+
+    <!-- This is the page header -->
+    <header>
+        <h1>Calendar Friend</h1>
+    </header>
+
+    <h2>Welcome, <span id="firstName"></span>!</h2>
+
+    <a href="Login Page.html">
+        <input type="button" value="Sign Out"/>
+    </a>
+
+</body>
+
+
+
+
+<!--Handle putting the first name in the header:-->
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const firstName = params.get("firstName");
+
+    if (firstName)
+    {
+        document.getElementById("firstName").textContent = firstName;
+    }
+    else
+    {
+        document.body.innerHTML = "<h1>Unauthorized access!</h1>";
+    }
+</script>
+
+</html>
