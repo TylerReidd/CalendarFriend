@@ -8,28 +8,27 @@ body {
 
 
 
-.login-form {
- 
+.form-1 {
   display:flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
 }
 
-.email-input{
+.input-1{
   width: 300px;
   height: 20px;
   margin-bottom: 5px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-.pass-input {
+.input-2 {
   width: 300px;
   height: 20px;
   margin-bottom: 20px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.log-in-btn {
+.btn-1 {
   margin: auto;
   align-items: center;
   display: flex;
