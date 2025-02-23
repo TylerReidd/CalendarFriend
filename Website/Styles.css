@@ -1,9 +1,12 @@
+
 body {
   font-family: "Itim", serif;
   font-weight: 400;
   font-style: normal;
   background: #1C71D2;
-  color: white
+  color: white;
+  padding: 0;
+  margin: 0;
 }
 
 .navbar {
@@ -11,7 +14,8 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: #333;
-  padding: 15px 20px;
+  padding-left: 10px;
+  margin: auto;
 }
 
 
