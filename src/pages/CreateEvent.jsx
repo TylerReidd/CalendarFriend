@@ -2,7 +2,7 @@ import { Calendar } from "../components/Calendar";
 import { useState } from "react";
 import LongField from "../components/LongField";
 import ShortField from "../components/ShortField";
-import Login from "../components/Login";
+import Login from "./Login";
 
 
 const CreateEvent = () => {
