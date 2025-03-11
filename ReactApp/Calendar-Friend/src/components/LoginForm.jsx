@@ -1,7 +1,7 @@
 
 
 
-const Form = ({ email, setEmail, password, setPassword, handleSubmit, errorMessage }) => {
+const LoginForm = ({ email, setEmail, password, setPassword, handleSubmit, errorMessage }) => {
   return (
 
     <form className="form-1" id="LoginForm" onSubmit={handleSubmit}>
@@ -35,4 +35,4 @@ const Form = ({ email, setEmail, password, setPassword, handleSubmit, errorMessa
   )
 }
 
-export default Form;
+export default LoginForm;

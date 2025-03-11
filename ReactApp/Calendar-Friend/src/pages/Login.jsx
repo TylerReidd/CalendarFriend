@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import Form from '../components/Form';
+import LoginForm from '../components/LoginForm';
 
 const Login = () => {
 
@@ -30,7 +30,7 @@ const Login = () => {
 
   return (
       <div>
-        <Form 
+        <LoginForm 
           email={email}
           setEmail={setEmail}
           password={password}
@@ -38,7 +38,10 @@ const Login = () => {
           handleSubmit={handleSubmit}
           errorMessage={errorMessage}
           />
-        
+          <div className= 'form-1'>
+            <p>Dont have an account?</p>
+            <a href='/register'>Sign-Up</a>
+          </div>
       </div>
 
     )
