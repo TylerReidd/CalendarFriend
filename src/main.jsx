@@ -9,11 +9,11 @@ import CreateEvent from './pages/CreateEvent.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-     {/* <App /> */}
+     <App />
     {/* <NavBar
     
     /> */}
-    <Login />
+    {/* <Login /> */}
     {/* <CreateEvent /> */}
     {/* <Calendar /> */}
   </StrictMode>,
