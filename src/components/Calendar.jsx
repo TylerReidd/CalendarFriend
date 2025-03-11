@@ -17,38 +17,55 @@
 
 // calendar.render()
 
-
+import React, {useState} from 'react';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 
-const events = [
-  {title: 'Meeting', start: new Date()}
-]
 
-export function Calendar() {
+export function Calendar({onEventSelected}) {
+  const [events, setEvents] = useState([
+    {title: "Meeting", start: new Date() },
+  ])
+
+  const handleSelect = (selectInfo) => {
+    let title = prompt("Enter Event Title:");
+    if (title) {
+      const newEvent = {
+        title, 
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+      }
+
+      setEvents([...events, newEvent])
+      selectInfo.view.calendar.addEvent(newEvent);
+
+      if(onEventSelected) {
+        onEventSelected(newEvent)
+      }
+    }
+  };
+
+
   return (
-    <div class='form-1'>
+    <div className='form-1'>
       <FullCalendar 
         plugins={[timeGridPlugin, interactionPlugin]}
         initialView='timeGridWeek'
         allDaySlot={false}
         weekends={true}
         selectable={true}
+        select={handleSelect}
         // selectMirror={true}
         events={events}
-        eventContent={renderEventContent}
+        eventContent={(eventInfo) => (
+          <>
+            <b>{eventInfo.timeText}</b> <i>{eventInfo.event.title}</i>
+          </>
+        )}
       />
     </div>
   )
 }
 
-function renderEventContent(eventInfo) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  )
-}
