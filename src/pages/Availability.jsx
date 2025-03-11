@@ -6,7 +6,7 @@ const Availability = ({eventId}) => {
 
   useEffect(() => {
     const fetchSlots = async () => {
-      const response = await fetch(`http://localhost:5000/api/events/${eventId}`)
+      const response = await fetch(`http://localhost:3000/api/events/${eventId}`)
       const data = await response.json()
       setAvailableSlots(data.events);
     }
@@ -19,7 +19,7 @@ const Availability = ({eventId}) => {
   }
 
   const submitAvailability = async () => {
-    await fetch("http://localhost:5000/api/availability", {
+    await fetch("http://localhost:3000/api/availability", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ eventId, availableTimes: userSelections }),
