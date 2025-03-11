@@ -12,7 +12,7 @@ const CreateEvent = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/events", {
+      const response = await fetch("http://localhost:3000/api/events", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({events: selectedEvents}),
