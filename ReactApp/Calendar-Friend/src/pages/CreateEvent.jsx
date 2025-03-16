@@ -12,35 +12,39 @@ const CreateEvent = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/events", {
+      const response = await fetch("http://localhost:3000/CreateEvent", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({events: selectedEvents}),
       })
 
-      if (response.ok) {
+      if (response.ok)
+      {
         console.log("Event created successfuly")
-      } else {
+      }
+      else
+      {
         console.error("Failed to create event")
       }
     } catch (error) {
       console.error("Error", error)
     }
   }
-  return (
+  return(
     <div class='form-1'>
+
       <h1>Create Event</h1>
 
-      <ShortField 
-  
-      />
+      <ShortField/>
       
-      <LongField />
+      <LongField/>
 
       <Calendar 
         onEventSelected={handleEventSelected}
       />
+
       <button onClick={handleSubmit}>Submit Event</button>
+
     </div>
   );
 };
