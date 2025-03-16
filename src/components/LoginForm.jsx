@@ -4,7 +4,11 @@
 const LoginForm = ({ email, setEmail, password, setPassword, handleSubmit, errorMessage }) => {
   return (
 
-    <form className="form-1" id="LoginForm" onSubmit={handleSubmit}>
+    <form 
+      className="form-1" 
+      id="LoginForm" 
+      onSubmit={handleSubmit}
+      >
             <label>Enter Email:</label>
             <input 
               className="input-1"  

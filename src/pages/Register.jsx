@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import RegistrationForm from './RegistrationForm';
+import RegistrationForm from '../components/RegistrationForm';
 
 const Register = () => {
 
@@ -15,23 +15,34 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch("http://localhost:3000/AuthenticatUser", {
-      method: "POST",
-      headers: {
-        "Content-Type":"application/json" },
-        body: JSON.stringify({
-          firstName, lastName, email, password
-        })
-    })
-    .then(response => response.json())
-    .then(data=> {
-      if (data.success) {
-        navigate('/register');
-      } else {
-        setErrorMessage("Error creating account")
-      }
-    })
-    .catch(error => console.error("Error:", error));
+    if(password != confirmPassword) 
+    {
+      setErrorMessage("Passwords Do Not Match!")
+    }
+    else if(firstName === "" || lastName === "" || email === "" || password === ""|| confirmPassword === "")
+    {
+      setErrorMessage("Missing Fields")
+    }
+    else {
+      fetch("http://localhost:3000/AuthenticateUser", {
+        method: "POST",
+        headers: {
+          "Content-Type":"application/json" },
+          body: JSON.stringify({
+            firstName, lastName, email, password, confirmPassword
+          })
+      })
+      .then(response => response.json())
+      .then(data=> {
+        if (data.success) {
+          navigate('/register');
+        } else {
+          setErrorMessage("Error creating account")
+        }
+      })
+      .catch(error => console.error("Error:", error));
+
+    }
 
   }
 
@@ -44,6 +55,8 @@ const Register = () => {
         password={password}
         setPassword={setPassword}
         firstName={firstName}
+        setFirstName={setFirstName}
+        setLastName={setLastName}
         lastName={lastName}
         confirmPassword={confirmPassword}
         setConfirmPassword={setConfirmPassword}
