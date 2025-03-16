@@ -1,13 +1,13 @@
 
 
 const RegistrationForm = ({email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, confirmPassword, setConfirmPassword, handleSubmit, errorMessage}) => {
-  <div class="form-1">
+
+  return (
         <form
           className="form-1" 
           id="RegisterForm"
           onSubmit={handleSubmit}
           >
-    
             <label>Enter First Name:</label>
             <input 
               className="input-1" 
@@ -66,10 +66,11 @@ const RegistrationForm = ({email, setEmail, firstName, setFirstName, lastName, s
               {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
             <div>
 
-                <a style="display: flex; justify-content: center; align-items: center; padding-top: 6px;" href="Login.html"> Return to Login Page </a>
+                <a style={{display: "flex", justifyContent: "center",alignItems: "center", paddingTop: "6px"}}href="Login.html"> Return to Login Page </a>
             </div>
         </form>
-    </div>
+ 
+  )
 }
 
 export default RegistrationForm;

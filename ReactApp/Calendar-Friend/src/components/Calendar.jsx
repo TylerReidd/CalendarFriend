@@ -1,21 +1,4 @@
-// import { Calendar } from "@fullcalendar/core";
-// import interactionPlugin from '@fullcalendar/interaction';
-// import dayGridPlugin from '@fullcalendar/daygrid';
 
-// const calendarEl = document.getElementById('calendar')
-// const calendar = new Calendar(calendarEl, {
-//   plugins: [
-//     interactionPlugin,
-//     dayGridPlugin
-//   ],
-//   initialView: 'timeGridWeek',
-//   editable: true,
-//   events: [
-//     {title: 'Meeting', start: new Date()}
-//   ]
-// });
-
-// calendar.render()
 
 import React, {useState} from 'react';
 import FullCalendar from '@fullcalendar/react'
@@ -30,6 +13,7 @@ export function Calendar({onEventSelected}) {
   ])
 
   const handleSelect = (selectInfo) => {
+    console.log(selectInfo);
     let title = prompt("Enter Event Title:");
     if (title) {
       const newEvent = {

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import CreateEvent from './pages/CreateEvent';
 import './App.css'
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 
 const App = () => {
@@ -12,8 +13,12 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
+
         <Route path="/login" element={<Login />} />
+
         <Route path="/createevent" element={<CreateEvent />}  />
+
+        <Route path="/register" element={<Register />} />
 
       </Routes>
       
