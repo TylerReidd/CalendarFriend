@@ -5,17 +5,16 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 
 
-export function Calendar({onEventSelected}) {
-  const [events, setEvents] = useState([
-    {title: "Meeting", start: new Date() },
-  ])
+export function Calendar({onEventSelected, eventTitle, eventDescription }) {
+  const [events, setEvents] = useState([])
+
 
   const handleSelect = (selectInfo) => {
-    console.log(selectInfo);
-    let title = prompt("Enter Event Title:");
-    if (title) {
+  
+    if (eventTitle && eventDescription) {
       const newEvent = {
-        title, 
+        title: eventTitle,
+        description: eventDescription,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
       }
@@ -26,6 +25,9 @@ export function Calendar({onEventSelected}) {
       if(onEventSelected) {
         onEventSelected(newEvent)
       }
+    } else {
+      console.warn("Event title or description is missing.")
+      alert("Event title or description is missing.")
     }
   };
 
@@ -39,7 +41,6 @@ export function Calendar({onEventSelected}) {
         weekends={true}
         selectable={true}
         select={handleSelect}
-        // selectMirror={true}
         events={events}
         eventContent={(eventInfo) => (
           <>
