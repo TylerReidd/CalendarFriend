@@ -4,43 +4,56 @@ import DescriptionField from "../components/DescriptionField";
 import TitleField from "../components/TitleField";
 
 
-
 const CreateEvent = () => {
-  const [selectedEvents, setSelectedEvents] = useState([])
+  const [finalEventSlots, setFinalEventSlot] = useState([])
   const [eventTitle, setEventTitle] = useState('')
   const [eventDescription, setEventDescription] = useState('')
 
+  let eventSlotCounter = 1;
+  let currentSlotName = "Slot " + eventSlotCounter;
+  let tempEventSlots = [];
+
   
   const handleEventSelected = (event) => {
+    console.log(event.eventSlotCounter)
     console.log(event.start)
     console.log(event.end)
 
-    // 0, 2025-03-17T00:30:00-04:00, 2025-03-21T06:00:00-04:00
-    // 1, 2025-03-17T00:30:00-04:00, 2025-03-21T06:00:00-04:00
-    const eventSlot = {
-      slotId: 0,
+    event.title = currentSlotName;
+
+    const newEventSlot =
+    {
+      slotId: eventSlotCounter,
       start: event.start,
       end: event.end, 
     }
-    const newEvent = {
-      title: eventTitle,
-      description: eventDescription,
-      eventSlot: [],
-      start: null , 
-      end: null
-    }
 
-    setSelectedEvents([...selectedEvents, newEvent])
+    tempEventSlots.push(JSON.stringify(newEventSlot));
+
+    eventSlotCounter++;
   };
 
 
 
   const handleSubmit = async () => {
-    try {
+
+    setFinalEventSlot([...finalEventSlots, tempEventSlots])
+
+    const newEvent =
+    {
+      title: eventTitle,
+      description: eventDescription,
+      eventSlot: tempEventSlots,
+      start: "null", 
+      end: "null"
+    }
+
+    try
+    {
       const response = await fetch("http://localhost:3000/CreateEvent", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({events: selectedEvents}),
+        body: JSON.stringify({event: newEvent}),
       })
 
       if (response.ok)
@@ -51,35 +64,44 @@ const CreateEvent = () => {
       {
         console.error("Failed to create event")
       }
-    } catch (error) {
+    }
+    catch (error)
+    {
       console.error("Error", error)
     }
   }
+
+  
   return(
-    <div class='form-1'>
+    <>
+      <div class='form-1'>
 
-      <h1>Create Event</h1>
+        <h1>Create Event</h1>
 
-      <TitleField
-        eventTitle={eventTitle}
-        onChange={(e) => setEventTitle(e.target.value)}
-      />
-      
-      <DescriptionField
-        eventDescription={eventDescription}
-        onChange={(e) => setEventDescription(e.target.value)} 
-      />
+        <TitleField
+          eventTitle={eventTitle}
+          onChange={(e) => setEventTitle(e.target.value)}
+        />
+        
+        <DescriptionField
+          eventDescription={eventDescription}
+          onChange={(e) => setEventDescription(e.target.value)} 
+        />
 
-      <Calendar 
-        events={selectedEvents}
-        onEventSelected={handleEventSelected}
-        eventTitle={eventTitle}
-        eventDescription={eventDescription}
-      />
+        <button onClick={handleSubmit}>Submit Event</button>
 
-      <button onClick={handleSubmit}>Submit Event</button>
+      </div>
 
-    </div>
+      <div id="CreateEventCalendar">
+        <Calendar
+          events={finalEventSlots}
+          onEventSelected={handleEventSelected}
+          eventTitle={currentSlotName}
+          eventDescription={eventDescription}
+        />
+      </div>
+
+    </>
   );
 };
 

@@ -32,23 +32,23 @@ const database = client.db('MainDB');
 
 app.post('/CreateEvent', async(req,res) => {
     try {
-        console.log("Recieved Request", req.body)
+        console.log("Recieved Request", req.body);
         await client.connect();
 
-        const {events} = req.body;
+        const { event } = req.body;
 
-        if (!events || events.length === 0)
-            {
-            return res.status(400).json({message: "No events"})
+        if (!event || event.length === 0)
+        {
+            return res.status(400).json({message: "No events"});
         }
 
-        const eventsCollection = database.collection("Events")
+        const eventsCollection = database.collection("Events");
 
-        const insertResult = await eventsCollection.insertMany(events)
+        const insertResult = await eventsCollection.insertOne(event);
 
         res.status(201).json({message: "Events Added successfully", insertedIds: insertResult.insertedIds});
     } catch (err) {
-        res.status(500).json({message: "error adding events", error: err.message})
+        res.status(500).json({message: "error adding events", error: err.message});
     } finally {
         await client.close()
     }
