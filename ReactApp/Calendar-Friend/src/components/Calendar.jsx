@@ -11,7 +11,8 @@ export function Calendar({onEventSelected, eventTitle, eventDescription }) {
 
   const handleSelect = (selectInfo) => {
   
-    if (eventTitle && eventDescription) {
+    if (eventTitle && eventDescription)
+      {
       const newEvent = {
         title: eventTitle,
         description: eventDescription,
@@ -22,7 +23,8 @@ export function Calendar({onEventSelected, eventTitle, eventDescription }) {
       setEvents([...events, newEvent])
       selectInfo.view.calendar.addEvent(newEvent);
 
-      if(onEventSelected) {
+      if(onEventSelected)
+      {
         onEventSelected(newEvent)
       }
     } else {
@@ -33,7 +35,7 @@ export function Calendar({onEventSelected, eventTitle, eventDescription }) {
 
 
   return (
-    <div className='form-1'>
+    <div>
       <FullCalendar 
         plugins={[timeGridPlugin, interactionPlugin]}
         initialView='timeGridWeek'
