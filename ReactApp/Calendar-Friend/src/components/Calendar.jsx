@@ -16,8 +16,8 @@ export function Calendar({onEventSelected, eventTitle, eventDescription }) {
       const newEvent = {
         title: eventTitle,
         description: eventDescription,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
+        start: selectInfo.start,
+        end: selectInfo.end,
       }
 
       setEvents([...events, newEvent])

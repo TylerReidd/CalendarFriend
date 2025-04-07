@@ -9,18 +9,21 @@ const CreateEvent = () => {
   const [eventTitle, setEventTitle] = useState('')
   const [eventDescription, setEventDescription] = useState('')
 
+  let tempEventSlots = [];
   let eventSlotCounter = 1;
   let currentSlotName = "Slot " + eventSlotCounter;
-  let tempEventSlots = [];
+ 
 
   
   const handleEventSelected = (event) => {
+    
     console.log(event.eventSlotCounter)
     console.log(event.start)
     console.log(event.end)
 
     event.title = currentSlotName;
 
+    //This renders to the calendar
     const newEventSlot =
     {
       slotId: eventSlotCounter,
@@ -29,7 +32,7 @@ const CreateEvent = () => {
     }
 
     tempEventSlots.push(JSON.stringify(newEventSlot));
-
+    console.log(tempEventSlots)
     eventSlotCounter++;
   };
 
@@ -38,14 +41,17 @@ const CreateEvent = () => {
   const handleSubmit = async () => {
 
     setFinalEventSlot([...finalEventSlots, tempEventSlots])
+    console.log("final event slots: ", finalEventSlots)
+    console.log("temp event slots: ", tempEventSlots)
+
 
     const newEvent =
     {
       title: eventTitle,
       description: eventDescription,
       eventSlot: tempEventSlots,
-      start: "null", 
-      end: "null"
+      start: newEvent.start, 
+      end: newEvent.end
     }
 
     try
