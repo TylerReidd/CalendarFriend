@@ -11,20 +11,18 @@ import Register from './pages/Register';
 
 
 const App = () => {
-
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
 
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login/>} />
 
-        <Route path="/createevent" element={<CreateEvent />}  />
+        <Route path="/createevent" element={<CreateEvent/>} />
 
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register/>} />
 
       </Routes>
-      
     </Router>
   )
 }
