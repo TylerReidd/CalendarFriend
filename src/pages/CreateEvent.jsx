@@ -2,6 +2,7 @@ import { Calendar } from "../components/Calendar";
 import { useState } from "react";
 import DescriptionField from "../components/DescriptionField";
 import TitleField from "../components/TitleField";
+import NavBar from "../components/Navbar";
 
 
 const CreateEvent = () => {
@@ -80,6 +81,7 @@ const CreateEvent = () => {
   
   return(
     <>
+    <NavBar />
       <div class='form-1'>
 
         <h1>Create Event</h1>

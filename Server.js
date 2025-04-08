@@ -30,6 +30,47 @@ const database = client.db('MainDB');
 
 //POST Methods:
 
+app.post('/getEventsByUser', async(req,res) => {
+    try {
+        console.log("GetEventsByUser, Recieved Request", req.body);
+        await client.connect();
+
+        const {userId} = req.body;
+        if (!userId || userId.length === 0)
+        {
+            return res.status(400).json({message: "No userId Entered"});
+        }
+
+        const eventsCollection = database.collection("Events");
+
+        const searchQuery = {};
+        searchQuery.userId = userId;
+        
+
+        const userEvents = eventsCollection.find(searchQuery);
+
+        if (!userEvents)
+        {
+            res.json({success:false});
+        }
+        else
+        {
+            const response = 
+            {
+                success : true,
+                events: userEvents
+            };
+            res.json(response);
+        }        
+    } catch(err) {
+        res.status(500).json({message: "Error finding user", error: err.message})
+    } finally {
+        await client.close()
+    }
+})
+
+
+
 app.post('/CreateEvent', async(req,res) => {
     try {
         console.log("Recieved Request", req.body);

@@ -7,7 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 
 export function Calendar({onEventSelected, eventTitle, eventDescription }) {
   const [events, setEvents] = useState([])
-
+  
 
   const handleSelect = (selectInfo) => {
   
