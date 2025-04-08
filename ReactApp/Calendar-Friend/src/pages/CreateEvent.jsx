@@ -2,11 +2,8 @@ import { Calendar } from "../components/Calendar";
 import { useState } from "react";
 import DescriptionField from "../components/DescriptionField";
 import TitleField from "../components/TitleField";
-<<<<<<< HEAD
 import NavBar from "../components/Navbar";
-=======
 import InviteList from "../components/InviteList";
->>>>>>> 995c6d24556c96a3d4223309739eb35bf88de926
 
 
 const CreateEvent = () => {
@@ -87,12 +84,8 @@ const CreateEvent = () => {
   
   return(
     <>
-<<<<<<< HEAD
     <NavBar />
-      <div class='form-1'>
-=======
       <div class='createEventForm'>
->>>>>>> 995c6d24556c96a3d4223309739eb35bf88de926
 
         <h1>Create Event</h1>
 
