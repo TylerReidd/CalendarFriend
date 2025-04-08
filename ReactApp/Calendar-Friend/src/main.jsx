@@ -7,14 +7,9 @@ import Login from './pages/Login.jsx'
 import { Calendar } from './components/Calendar.jsx'
 import CreateEvent from './pages/CreateEvent.jsx'
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById('root')).render
+(
   <StrictMode>
-     <App />
-    {/* <NavBar
-    
-    /> */}
-    {/* <Login /> */}
-    {/* <CreateEvent /> */}
-    {/* <Calendar /> */}
+     <App/>
   </StrictMode>,
 )

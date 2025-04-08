@@ -2,21 +2,30 @@ import { Calendar } from "../components/Calendar";
 import { useState } from "react";
 import DescriptionField from "../components/DescriptionField";
 import TitleField from "../components/TitleField";
+<<<<<<< HEAD
 import NavBar from "../components/Navbar";
+=======
+import InviteList from "../components/InviteList";
+>>>>>>> 995c6d24556c96a3d4223309739eb35bf88de926
 
 
 const CreateEvent = () => {
-  const [finalEventSlots, setFinalEventSlot] = useState([])
+  const [eventSlots, setEventSlot] = useState([])
   const [eventTitle, setEventTitle] = useState('')
   const [eventDescription, setEventDescription] = useState('')
-
-  let tempEventSlots = [];
+  const [eventHost, setEventHost] = useState('')
+  const [inviteList, setInviteList] = useState([]);
   let eventSlotCounter = 1;
-  let currentSlotName = "Slot " + eventSlotCounter;
- 
+  let currentSlotName = "Slot ";
 
+
+  const handleInviteListUpdate = (updatedList) => {
+    setInviteList(updatedList);
+  };
   
   const handleEventSelected = (event) => {
+
+    currentSlotName = "Slot " + eventSlotCounter;
     
     console.log(event.eventSlotCounter)
     console.log(event.start)
@@ -32,8 +41,8 @@ const CreateEvent = () => {
       end: event.end, 
     }
 
-    tempEventSlots.push(JSON.stringify(newEventSlot));
-    console.log(tempEventSlots)
+    eventSlots.push(JSON.stringify(newEventSlot));
+
     eventSlotCounter++;
   };
 
@@ -41,18 +50,15 @@ const CreateEvent = () => {
 
   const handleSubmit = async () => {
 
-    setFinalEventSlot([...finalEventSlots, tempEventSlots])
-    console.log("final event slots: ", finalEventSlots)
-    console.log("temp event slots: ", tempEventSlots)
-
-
     const newEvent =
     {
       title: eventTitle,
+      eventHost: "Person",
       description: eventDescription,
-      eventSlot: tempEventSlots,
-      start: newEvent.start, 
-      end: newEvent.end
+      eventSlot: eventSlots,
+      eventInviteList: inviteList,
+      start: null,
+      end: null
     }
 
     try
@@ -81,28 +87,49 @@ const CreateEvent = () => {
   
   return(
     <>
+<<<<<<< HEAD
     <NavBar />
       <div class='form-1'>
+=======
+      <div class='createEventForm'>
+>>>>>>> 995c6d24556c96a3d4223309739eb35bf88de926
 
         <h1>Create Event</h1>
 
-        <TitleField
-          eventTitle={eventTitle}
-          onChange={(e) => setEventTitle(e.target.value)}
-        />
-        
-        <DescriptionField
-          eventDescription={eventDescription}
-          onChange={(e) => setEventDescription(e.target.value)} 
-        />
+        <div class="formRow">
 
-        <button onClick={handleSubmit}>Submit Event</button>
+          <div class="formColumn">
+
+            <h2>General Event Information</h2>
+
+            <TitleField
+              eventTitle={eventTitle}
+              onChange={(e) => setEventTitle(e.target.value)}
+            />
+            
+            <DescriptionField
+              eventDescription={eventDescription}
+              onChange={(e) => setEventDescription(e.target.value)} 
+            />
+          </div>
+          
+          <div class="formColumn">
+
+            <h2>Event Invite List</h2>
+
+            <InviteList onChange={handleInviteListUpdate} />
+
+          </div>
+
+        </div>
+
+        <button class="btn-1" onClick={handleSubmit}>Submit Event</button>
 
       </div>
 
       <div id="CreateEventCalendar">
         <Calendar
-          events={finalEventSlots}
+          events={eventSlots}
           onEventSelected={handleEventSelected}
           eventTitle={currentSlotName}
           eventDescription={eventDescription}
