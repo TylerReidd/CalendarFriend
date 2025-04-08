@@ -20,7 +20,7 @@ const Login = () => {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                navigate('/createEvent');
+                navigate('/dashboard');
             } else {
                 setErrorMessage("Invalid credentials!");
             }

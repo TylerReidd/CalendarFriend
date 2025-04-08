@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+// import { useState } from 'react'
 
 import './App.css'
 
@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import CreateEvent from './pages/CreateEvent';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 
 
 const App = () => {
@@ -22,6 +23,8 @@ const App = () => {
         <Route path="/createevent" element={<CreateEvent />}  />
 
         <Route path="/register" element={<Register />} />
+
+        <Route path="/dashboard" element={<Dashboard/>} />
 
       </Routes>
       
