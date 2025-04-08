@@ -2,7 +2,6 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import express from 'express';
 import cors from 'cors';
-import { error } from 'console';
 const app = express();
 
 app.use(cors());
