@@ -1,5 +1,6 @@
 import { Calendar } from "../components/Calendar";
 import { useState } from "react";
+import { useLocation } from 'react-router-dom';
 import DescriptionField from "../components/DescriptionField";
 import TitleField from "../components/TitleField";
 import NavBar from "../components/Navbar";
@@ -14,6 +15,9 @@ const CreateEvent = () => {
   const [inviteList, setInviteList] = useState([]);
   let eventSlotCounter = 1;
   let currentSlotName = "Slot ";
+
+  const location = useLocation();
+  const { email } = location.state || {};
 
 
   const handleInviteListUpdate = (updatedList) => {
@@ -49,8 +53,8 @@ const CreateEvent = () => {
 
     const newEvent =
     {
-      title: eventTitle,
-      eventHost: "Person",
+      eventTitle: eventTitle,
+      eventHost: email,
       description: eventDescription,
       eventSlot: eventSlots,
       eventInviteList: inviteList,
@@ -84,7 +88,7 @@ const CreateEvent = () => {
   
   return(
     <>
-    <NavBar />
+    <NavBar email={email} />
       <div class='createEventForm'>
 
         <h1>Create Event</h1>

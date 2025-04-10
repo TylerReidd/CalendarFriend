@@ -1,9 +1,9 @@
 
 
-function NavBar() {
+function NavBar({email}) {
   return (
   <nav class="navbar">
-    <div class="logo">Calendar Friend | Welcome, <span id="firstName"></span>! </div>
+    <div class="logo">Calendar Friend | Welcome, <span id="email">{email}</span>! </div>
     
     <ul class="nav-links">
         <li><a href="#" class="active">Home</a></li>
