@@ -1,41 +1,60 @@
 import React, {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import PendingEvents from '../components/PendingEvents';
 import EventCard from '../components/EventCard';
 import NavBar from '../components/Navbar';
 
-
 const Dashboard = () => { 
+
+  const [allEvents, setAllEvents] = useState([])
   const [pendingEvents, setPendingEvents] = useState([])
   const [confirmedEvents, setConfirmedEvents] = useState([])
-  const navigate = useNavigate();
 
-  const user = {};
-  user.userId = "christophersciorti@mail.adelphi.edu";
+  const location = useLocation();
+  const { email } = location.state || {};
+
+  const navigate = useNavigate();
+  const navigateToCreateEvent = () => {
+    navigate("/CreateEvent", {
+      state:
+      {
+        email: email
+      }
+    });
+  };
 
   useEffect(() => {
-    fetch("http://localhost:3000/getEventsByUser", {
+    fetch("http://localhost:3000/GetEventsByEmail", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify( {user} )
+            body: JSON.stringify( { email } )
         })
         .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                console.log(data);
-            } else {
-                console.log("data is not successful");
-            }
+        .then(data =>
+        {
+          if (data.success)
+          {
+            setAllEvents(data.events);
+          }
+          else
+          {
+            console.log("data is not successful");
+          }
         })
   }, []);
 
   return (
     <>
-    <NavBar />
+    <NavBar email={email} />
+
     <main className='form-1'>
+
       <section >
         <h2 className=''>Pending Events</h2>
-        <PendingEvents events={pendingEvents} />
+        {allEvents.map((event) => (
+            <EventCard title={event.eventTitle} host={event.eventHost} />
+          ))}
       </section>
 
       <section>
@@ -43,9 +62,10 @@ const Dashboard = () => {
         {/* <ConfirmedEvents events={confirmedEvents} />  */}
       </section>
 
-      <button className='btn-1' onClick={() => navigate('/CreateEvent')}>
+      <button className='btn-1' onClick={() => navigateToCreateEvent()}>
         Create Event
       </button>
+
     </main>
     </>
   )

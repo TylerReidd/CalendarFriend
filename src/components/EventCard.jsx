@@ -1,24 +1,25 @@
 import React from 'react'
 
-
-
-const EventCard = ({event,type}) => {
+const EventCard = ({title, host}) => {
   return (
     <>
-    <div className='rounded-2xl shadow p-4 border border-gray-200'>
-      <h3 className='text-lg font-semibold'>{event.title}</h3>
-      <p className='text-sm text-gray-600'>{event.host}</p>
-      <p className='text-sm text-gray-600'>{event.dateRange}</p>
+    <div className="eventCard">
 
-      {type === 'pending' ? (
-        <Button className="mt-2">Respond</Button>
-      ) : (
-        <Button varient='outline' className="mt-2">View Details</Button>
-      )}
+      <div className="eventCardInfo">
+        <h3>Event Title:</h3>
+        <p>{title}</p>
+      </div>
+
+      <div className="eventCardInfo">
+        <h3>Event Host:</h3>
+        <p>{host}</p>
+      </div>
+
+      <button class="eventCardViewDetailsButton" >View Event Details</button>
+
     </div>
     </>
   )
 }
-
 
 export default EventCard

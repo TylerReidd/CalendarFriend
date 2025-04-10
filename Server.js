@@ -2,16 +2,22 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import express from 'express';
 import cors from 'cors';
+import dotenv from "dotenv";
+
 const app = express();
+
+dotenv.config();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//const username = encodeURIComponent(process.env.USERNAME);
+//const password = encodeURIComponent(process.env.PASSWORD);
 const username = encodeURIComponent("service-user");
 const password = encodeURIComponent("qb7HIiNvnaQRMblg");
 const uri = "mongodb+srv://" + username + ":" + password + "@calendarfriendmainclust.y8zmw.mongodb.net/?retryWrites=true&w=majority&appName=CalendarFriendMainCluster";
-const port = 3000;
+const port = process.env.PORT;
 
 const client = new MongoClient(uri,
 {
@@ -29,44 +35,50 @@ const database = client.db('MainDB');
 
 //POST Methods:
 
-app.post('/getEventsByUser', async(req,res) => {
-    try {
-        console.log("GetEventsByUser, Recieved Request", req.body);
+app.post('/GetEventsByEmail', async (req, res) =>
+{
+    try
+    {
         await client.connect();
 
-        const {userId} = req.body;
-        if (!userId || userId.length === 0)
+        const { email } = req.body;
+
+        if (email == null)
         {
-            return res.status(400).json({message: "No userId Entered"});
+            return res.status(400).json({ message: "Missing Required Parameters: Email" });
         }
 
-        const eventsCollection = database.collection("Events");
+        const eventsCollection = database.collection('Events');
 
-        const searchQuery = {};
-        searchQuery.userId = userId;
-        
+        const results = await eventsCollection.find({ eventInviteList: email }).toArray();
+        const events = JSON.stringify(results);
 
-        const userEvents = eventsCollection.find(searchQuery);
-
-        if (!userEvents)
+        if (!results)
         {
-            res.json({success:false});
+            const response = 
+            {
+                success : false,
+                events : null
+            };
+            res.json(response);
         }
         else
         {
             const response = 
             {
                 success : true,
-                events: userEvents
+                events : results
             };
             res.json(response);
         }        
-    } catch(err) {
-        res.status(500).json({message: "Error finding user", error: err.message})
-    } finally {
-        await client.close()
+
+        await client.close();
     }
-})
+    catch (err)
+    {
+        res.status(500).json({ message: err.message });
+    }
+});
 
 
 

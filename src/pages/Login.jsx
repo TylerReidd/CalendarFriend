@@ -2,12 +2,21 @@ import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import LoginForm from '../components/LoginForm';
 
-const Login = () => {
 
-  const navigate = useNavigate();
+const Login = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+  const navigateToDashboard = () => {
+    navigate("/dashboard", {
+      state:
+      {
+        email: email
+      }
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,10 +28,13 @@ const Login = () => {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.success) {
-                navigate('/dashboard');
-            } else {
-                setErrorMessage("Invalid credentials!");
+            if (data.success)
+            {
+              navigateToDashboard();
+            }
+            else
+            {
+              setErrorMessage("Invalid credentials!");
             }
         })
         .catch(error => console.error("Error:", error));
@@ -30,6 +42,7 @@ const Login = () => {
 
   return (
       <div>
+
         <LoginForm 
           email={email}
           setEmail={setEmail}
@@ -37,13 +50,14 @@ const Login = () => {
           setPassword={setPassword}
           handleSubmit={handleSubmit}
           errorMessage={errorMessage}
-          />
-          <div className= 'form-1'>
-            <p>Dont have an account?</p>
-            <a href='/register'>Sign-Up</a>
-          </div>
-      </div>
+        />
 
+        <div className= 'form-1'>
+          <p>Dont have an account?</p>
+          <a href='/register'>Sign-Up</a>
+        </div>
+
+      </div>
     )
   }
 export default Login;
