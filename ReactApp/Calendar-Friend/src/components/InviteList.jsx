@@ -21,14 +21,14 @@ const InviteList = ({ onChange }) => {
   };
 
   return(
-    <div className="inviteList">
-      <div className="inviteListContainer">
+    <div className = "input-with-label">
+      <div className="">
         <input
-          className="input-1"
+          className="text-input-1" 
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Enter email address to invite..."
+          placeholder="Enter email..."
         />
         <button
           className="btn-1"
@@ -36,12 +36,13 @@ const InviteList = ({ onChange }) => {
         >
           Add
         </button>
-      </div>
-      <ul className="space-y-2">
+    </div>
+
+      <ul>
         {people.map((person, index) => (
           <li
             key={index}
-            className="flex justify-between items-center bg-gray-100 p-2 rounded"
+            className=""
           >
             <span>{person}</span>
             <button

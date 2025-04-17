@@ -5,17 +5,19 @@ const EventCard = ({title, host}) => {
     <>
     <div className="eventCard">
 
-      <div className="eventCardInfo">
-        <h3>Event Title:</h3>
-        <p>{title}</p>
+      <div>
+        <div className="eventCardInfo">
+          <h3>Event Title:</h3>
+          <p>{title}</p>
+        </div>
+
+        <div className="eventCardInfo">
+          <h3>Event Host:</h3>
+          <p>{host}</p>
+        </div>
       </div>
 
-      <div className="eventCardInfo">
-        <h3>Event Host:</h3>
-        <p>{host}</p>
-      </div>
-
-      <button class="eventCardViewDetailsButton" >View Event Details</button>
+      <button class="eventCardViewDetailsButton">View Event Details</button>
 
     </div>
     </>
