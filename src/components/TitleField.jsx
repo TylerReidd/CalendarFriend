@@ -1,10 +1,10 @@
 
 const TitleField = ({eventTitle,  onChange}) =>{
   return(
-    <div class='form-1'>
+    <div className = "input-with-label">
       <label>Event Title</label>
       <input
-        className='input-1'
+        className="text-input-1" 
         placeholder="Title"
         type="text"
         id="titleField"

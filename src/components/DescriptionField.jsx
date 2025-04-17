@@ -4,10 +4,10 @@
 const DescriptionField = ({eventDescription, onChange}) =>  {
  return (
 
- <div class='form-1'>
+  <div className = "input-with-label">
     <label>Event Description </label>
     <input
-      className="input-1"
+      className="text-input-1" 
       placeholder="Enter Description"
       type="text"
       id="textfield"

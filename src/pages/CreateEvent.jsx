@@ -88,14 +88,15 @@ const CreateEvent = () => {
   
   return(
     <>
-    <NavBar email={email} />
+      <NavBar email={email} />
+
       <div class='createEventForm'>
 
         <h1>Create Event</h1>
 
-        <div class="formRow">
+        <div class="createEventForm-Top">
 
-          <div class="formColumn">
+          <div>
 
             <h2>General Event Information</h2>
 
@@ -108,9 +109,10 @@ const CreateEvent = () => {
               eventDescription={eventDescription}
               onChange={(e) => setEventDescription(e.target.value)} 
             />
+
           </div>
           
-          <div class="formColumn">
+          <div>
 
             <h2>Event Invite List</h2>
 
@@ -124,7 +126,7 @@ const CreateEvent = () => {
 
       </div>
 
-      <div id="CreateEventCalendar">
+      <div className="" id="CreateEventCalendar">
         <Calendar
           events={eventSlots}
           onEventSelected={handleEventSelected}

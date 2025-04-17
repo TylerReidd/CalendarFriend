@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { Calendar } from "../components/Calendar";
 import PendingEvents from '../components/PendingEvents';
 import EventCard from '../components/EventCard';
 import NavBar from '../components/Navbar';
@@ -46,27 +47,29 @@ const Dashboard = () => {
 
   return (
     <>
-    <NavBar email={email} />
+    
+      <NavBar email={email} />
+        
+      <button className='create-event-button' onClick={() => navigateToCreateEvent()}> Create Event </button>
 
-    <main className='form-1'>
+      <div className="event-sections">
 
-      <section >
-        <h2 className=''>Pending Events</h2>
-        {allEvents.map((event) => (
-            <EventCard title={event.eventTitle} host={event.eventHost} />
-          ))}
-      </section>
+        <div>
+          <h1>Pending Events</h1>
+          {allEvents.map((event) => (
+              <EventCard title={event.eventTitle} host={event.eventHost} />
+            ))}
+        </div>
 
-      <section>
-        <h2 className=''>Confirmed Events</h2>
-        {/* <ConfirmedEvents events={confirmedEvents} />  */}
-      </section>
+        <div>
+          <h1>Confirmed Events</h1>
+          {allEvents.map((event) => (
+              <EventCard title={event.eventTitle} host={event.eventHost} />
+            ))}
+        </div>
 
-      <button className='btn-1' onClick={() => navigateToCreateEvent()}>
-        Create Event
-      </button>
+      </div>
 
-    </main>
     </>
   )
 }
