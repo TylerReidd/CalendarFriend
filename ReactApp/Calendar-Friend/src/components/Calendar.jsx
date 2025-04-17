@@ -35,7 +35,7 @@ export function Calendar({onEventSelected, eventTitle, eventDescription }) {
 
 
   return (
-    <div>
+    <div style={{width:"75%", margin:"auto"}}>
       <FullCalendar 
         plugins={[timeGridPlugin, interactionPlugin]}
         initialView='timeGridWeek'
@@ -44,6 +44,7 @@ export function Calendar({onEventSelected, eventTitle, eventDescription }) {
         selectable={true}
         select={handleSelect}
         events={events}
+        aspectRatio={2}
         eventContent={(eventInfo) => (
           <>
             <b>{eventInfo.timeText}</b> <i>{eventInfo.event.title}</i>

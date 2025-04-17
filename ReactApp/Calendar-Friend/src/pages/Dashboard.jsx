@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { Calendar } from "../components/Calendar";
 import PendingEvents from '../components/PendingEvents';
 import EventCard from '../components/EventCard';
 import NavBar from '../components/Navbar';
+import { MonthCalendar } from '../components/MonthCalendar';
 
 const Dashboard = () => { 
 
@@ -61,13 +61,12 @@ const Dashboard = () => {
             ))}
         </div>
 
-        <div>
-          <h1>Confirmed Events</h1>
-          {allEvents.map((event) => (
-              <EventCard title={event.eventTitle} host={event.eventHost} />
-            ))}
-        </div>
+        <MonthCalendar/>
 
+      </div>
+
+      <div>
+        
       </div>
 
     </>
