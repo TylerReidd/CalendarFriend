@@ -9,7 +9,7 @@ export function MonthCalendar({}) {
 
 
   return (
-    <div>
+    <div className="month-calendar">
       <FullCalendar 
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView='dayGridMonth'
@@ -17,6 +17,7 @@ export function MonthCalendar({}) {
         weekends={true}
         selectable={true}
         events={events}
+        height={650}
         aspectRatio={2}
         eventContent={(eventInfo) => (
           <>

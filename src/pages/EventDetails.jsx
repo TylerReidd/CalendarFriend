@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect} from 'react';
 
-const Availability = ({eventId}) => {
+const EventDetails = ({eventId}) => {
   const [availableSlots, setAvailableSlots] = useState([])
   const [userSelections, setUserSelections] = useState([])
 
@@ -39,4 +39,4 @@ const Availability = ({eventId}) => {
   )
 }
 
-export default Availability;
+export default EventDetails;

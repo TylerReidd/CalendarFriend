@@ -1,6 +1,20 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const EventCard = ({title, host}) => {
+
+  const navigate = useNavigate();
+  const navigateToEventDetails = () => {
+    navigate("/eventdetails", {
+      state:
+      {
+        title: title,
+        host: host,
+      }
+    });
+  };
+
   return (
     <>
     <div className="eventCard">
@@ -17,7 +31,7 @@ const EventCard = ({title, host}) => {
         </div>
       </div>
 
-      <button class="eventCardViewDetailsButton">View Event Details</button>
+      <button onClick={() => navigateToEventDetails()} class="eventCardViewDetailsButton">View Event Details</button>
 
     </div>
     </>

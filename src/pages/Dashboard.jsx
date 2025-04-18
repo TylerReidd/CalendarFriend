@@ -16,14 +16,6 @@ const Dashboard = () => {
   const { email } = location.state || {};
 
   const navigate = useNavigate();
-  const navigateToCreateEvent = () => {
-    navigate("/CreateEvent", {
-      state:
-      {
-        email: email
-      }
-    });
-  };
 
   useEffect(() => {
     fetch("http://localhost:3000/GetEventsByEmail", {
@@ -49,8 +41,6 @@ const Dashboard = () => {
     <>
     
       <NavBar email={email} />
-        
-      <button className='create-event-button' onClick={() => navigateToCreateEvent()}> Create Event </button>
 
       <div className="event-sections">
 
@@ -63,10 +53,6 @@ const Dashboard = () => {
 
         <MonthCalendar/>
 
-      </div>
-
-      <div>
-        
       </div>
 
     </>
