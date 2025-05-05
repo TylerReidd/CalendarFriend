@@ -106,6 +106,37 @@ app.post('/CreateEvent', async(req,res) => {
     }
 });
 
+app.post('/DeclineEvent', async(req,res) => {
+    try {
+        console.log("Recieved Request", req.body);
+        await client.connect();
+
+        const { event, email } = req.body;
+
+        if (!event || event.length === 0)
+        {
+            return res.status(400).json({message: "No event"});
+        }
+
+        const eventsCollection = database.collection("Events");
+
+        eventsCollection.updateOne(
+            { eventTitle: event },
+            { $pull: { eventInviteList: email } }
+        )
+
+        return res.json({ success:true });
+    }
+    catch (err)
+    {
+        res.status(500).json({message: "Error Declining Event", error: err.message});
+    }
+    finally
+    {
+        await client.close()
+    }
+});
+
 app.post('/CreateUser', async (req, res) =>
 {
     try

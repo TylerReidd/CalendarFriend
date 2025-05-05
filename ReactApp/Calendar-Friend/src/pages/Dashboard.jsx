@@ -47,7 +47,7 @@ const Dashboard = () => {
         <div>
           <h1>Pending Events</h1>
           {allEvents.map((event) => (
-              <EventCard title={event.eventTitle} host={event.eventHost} />
+              <EventCard event={event.eventTitle} host={event.eventHost} email={email} />
             ))}
         </div>
 
