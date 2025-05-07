@@ -314,11 +314,11 @@ body
 {
   display: flex;
   align-items: center;  
-  flex-shrink: 0;
   
-	width: 35%;
-	height: 2%;
-  padding: 2%;
+  width: 130%;
+  padding: 15%;
+  margin-top: 15%;
+  margin-right: 20%;
 
   cursor: pointer;
 
@@ -374,6 +374,16 @@ body
   padding: 0%;
   align-items: left;
   text-align: left;
+}
+
+.eventCardButtons
+{
+  display: flex;
+  flex-direction: column;
+  padding: 8%;
+  margin: 8%;
+  width: auto;
+  height: auto;
 }
 
 a {
