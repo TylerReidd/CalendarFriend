@@ -1,54 +1,64 @@
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import PendingEvents from '../components/PendingEvents';
 import EventCard from '../components/EventCard';
 import NavBar from '../components/Navbar';
 import { MonthCalendar } from '../components/MonthCalendar';
 
 const Dashboard = () => { 
 
-  const [allEvents, setAllEvents] = useState([])
-  const [pendingEvents, setPendingEvents] = useState([])
-  const [confirmedEvents, setConfirmedEvents] = useState([])
-
   const location = useLocation();
-  const { email } = location.state || {};
+  const { email, firstName, lastName } = location.state || {};
 
-  const navigate = useNavigate();
+  const [allEvents, setAllEvents] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:3000/GetEventsByEmail", {
+    async function fetchData()
+    {
+      try
+      {
+        const[res1] = await Promise.all([
+          fetch("http://localhost:3000/GetEventsByEmail", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify( { email } )
-        })
-        .then(response => response.json())
-        .then(data =>
-        {
+          })
+        ]);
+
+        res1.json().then(data => {
           if (data.success)
           {
             setAllEvents(data.events);
           }
           else
           {
-            console.log("data is not successful");
+            console.log("Could not get events.");
           }
-        })
-  }, []);
+        });
 
+      }
+      catch (error)
+      {
+        console.log("Error getting all data.");
+      }
+    }
+
+    fetchData();
+  }, []);
+  
   return (
     <>
     
-      <NavBar email={email} />
+      <NavBar email={email} firstName={firstName} lastName={lastName}/>
 
       <div className="event-sections">
 
         <div>
+
           <h1>Pending Events</h1>
           {allEvents.map((event) => (
-              <EventCard event={event.eventTitle} host={event.eventHost} email={email} />
-            ))}
+            <EventCard key={event._id} email={email} firstName={firstName} lastName={lastName} eventId={event._id} eventTitle={event.eventTitle} host={event.eventHost}/> 
+          ))}
+
         </div>
 
         <MonthCalendar/>

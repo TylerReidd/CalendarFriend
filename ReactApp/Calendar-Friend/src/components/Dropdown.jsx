@@ -8,12 +8,12 @@ const Dropdown = ( {slots} ) => {
   };
 
   return (
-    <div>
-      <select id="drop" value={selectedOption} onChange={handleChange}>
+    <div className="dropdown-1">
+      <select className="dropwdown1-content" value={selectedOption} onChange={handleChange}>
         <option value="">Choose</option>
         {slots.map((option) => (
-          <option key={option} value={option.toLowerCase()}>
-            {option}
+          <option key={option} value={option}>
+            {option.dateFormatted}
           </option>
         ))}
       </select>

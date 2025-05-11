@@ -1,5 +1,5 @@
 //Setup the Server File:
-import { MongoClient, ServerApiVersion } from 'mongodb';
+import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb';
 import express from 'express';
 import cors from 'cors';
 import dotenv from "dotenv";
@@ -35,6 +35,56 @@ const database = client.db('MainDB');
 
 //POST Methods:
 
+app.post('/GetEventById', async (req, res) =>
+{
+    try
+    {
+        await client.connect();
+
+        const { eventId } = req.body;
+
+        if (eventId == null)
+        {
+            return res.status(400).json({ message: "Missing Required Parameters: EventId" });
+        }
+
+        const eventsCollection = database.collection('Events');
+
+        const event = await eventsCollection.findOne( { _id: new ObjectId(eventId) } );
+
+        if (!event)
+        {
+            const response = 
+            {
+                success : false,
+            };
+            res.json(response);
+        }
+        else
+        {
+            const response = 
+            {
+                success : true,
+                eventTitle : event.evenTitle,
+                eventHost : event.eventHost,
+                description : event.description,
+                eventSlot : event.eventSlot,
+                eventInviteList : event.eventInviteList,
+                start : event.start,
+                end : event.end
+            };
+            res.json(response);
+        }        
+
+        await client.close();
+    }
+    catch (err)
+    {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
 app.post('/GetEventsByEmail', async (req, res) =>
 {
     try
@@ -51,7 +101,6 @@ app.post('/GetEventsByEmail', async (req, res) =>
         const eventsCollection = database.collection('Events');
 
         const results = await eventsCollection.find({ eventInviteList: email }).toArray();
-        const events = JSON.stringify(results);
 
         if (!results)
         {
@@ -81,6 +130,51 @@ app.post('/GetEventsByEmail', async (req, res) =>
 });
 
 
+app.post('/GetNameByEmail', async (req, res) =>
+{
+    try
+    {
+        await client.connect();
+
+        const { email } = req.body;
+
+        if (email == null)
+        {
+            return res.status(400).json({ message: "Missing Required Parameters: Email" });
+        }
+
+        const userCollection = database.collection('Users');
+
+        const results = await userCollection.find({ email: email });
+        const fullName = "" + results.firstName + " " + results.lastName; 
+
+        if (!results)
+        {
+            const response = 
+            {
+                success : false,
+                fullName : null
+            };
+            res.json(response);
+        }
+        else
+        {
+            const response = 
+            {
+                success : true,
+                fullName : fullName
+            };
+            res.json(response);
+        }        
+
+        await client.close();
+    }
+    catch (err)
+    {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 
 app.post('/CreateEvent', async(req,res) => {
     try {
@@ -106,22 +200,23 @@ app.post('/CreateEvent', async(req,res) => {
     }
 });
 
+
 app.post('/DeclineEvent', async(req,res) => {
-    try {
-        console.log("Recieved Request", req.body);
+    try
+    {
         await client.connect();
 
-        const { event, email } = req.body;
+        const { eventID, email } = req.body;
 
-        if (!event || event.length === 0)
+        if (!eventID ||!email)
         {
-            return res.status(400).json({message: "No event"});
+            return res.status(400).json({message: "No event or email recieved."});
         }
 
-        const eventsCollection = database.collection("Events");
+        const eventsCollection = database.collection('Events');
 
-        eventsCollection.updateOne(
-            { eventTitle: event },
+        await eventsCollection.updateOne(
+            { _id: eventID },
             { $pull: { eventInviteList: email } }
         )
 
@@ -136,6 +231,7 @@ app.post('/DeclineEvent', async(req,res) => {
         await client.close()
     }
 });
+
 
 app.post('/CreateUser', async (req, res) =>
 {

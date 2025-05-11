@@ -1,17 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 
-const EventCard = ({event, host, email}) => {
+const EventCard = ({email, firstName, lastName, eventId, eventTitle, host}) => {
 
   const navigate = useNavigate();
+
   const navigateToEventDetails = () => {
     navigate("/eventdetails", {
       state:
       {
-        event: event,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        eventId: eventId,
+        eventTitle: eventTitle,
         host: host,
-        email: email
       }
     });
   };
@@ -20,7 +23,9 @@ const EventCard = ({event, host, email}) => {
     navigate("/dashboard", {
       state:
       {
-        email: email
+        email: email,
+        firstName: firstName,
+        lastName: lastName
       }
     });
   };
@@ -30,7 +35,7 @@ const EventCard = ({event, host, email}) => {
     fetch("http://localhost:3000/DeclineEvent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify( { event, email } )
+      body: JSON.stringify( { eventID, email } )
     })
     .then(response => response.json())
     .then(data =>
@@ -38,6 +43,7 @@ const EventCard = ({event, host, email}) => {
       if (data.success)
       {
         navigateBackToDashboard();
+        location.reload();
       }
       else
       {
@@ -53,7 +59,7 @@ const EventCard = ({event, host, email}) => {
       <div>
         <div className="eventCardInfo">
           <h3>Event Title:</h3>
-          <p>{event}</p>
+          <p>{eventTitle}</p>
         </div>
 
         <div className="eventCardInfo">
@@ -63,9 +69,9 @@ const EventCard = ({event, host, email}) => {
       </div>
 
       <div className="eventCardButtons" id="eventCardButtons">
-        <button onClick={() => navigateToEventDetails()} class="eventCardViewDetailsButton">View Event Details</button>
+        <button onClick={() => navigateToEventDetails()} className="eventCardViewDetailsButton">View Event Details</button>
 
-        <button onClick={() => declineEvent()} class="eventCardViewDetailsButton"> Decline Event </button>
+        <button onClick={() => declineEvent()} className="eventCardViewDetailsButton"> Decline Event </button>
       </div>
 
       

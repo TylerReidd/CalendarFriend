@@ -17,7 +17,7 @@ const CreateEvent = () => {
   let currentSlotName = "Slot ";
 
   const location = useLocation();
-  const { email } = location.state || {};
+  const { email, firstName, lastName } = location.state || {};
 
 
   const handleInviteListUpdate = (updatedList) => {
@@ -88,13 +88,13 @@ const CreateEvent = () => {
   
   return(
     <>
-      <NavBar email={email} />
+      <NavBar email={email} firstName={firstName} lastName={lastName} />
 
-      <div class='createEventForm'>
+      <div className='createEventForm'>
 
         <h1>Create Event</h1>
 
-        <div class="createEventForm-Top">
+        <div className="createEventForm-Top">
 
           <div>
 
@@ -122,7 +122,7 @@ const CreateEvent = () => {
 
         </div>
 
-        <button class="btn-1" onClick={handleSubmit}>Submit Event</button>
+        <button className="btn-1" onClick={handleSubmit}>Submit Event</button>
 
       </div>
 

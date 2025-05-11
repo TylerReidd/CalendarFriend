@@ -9,11 +9,14 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
-  const navigateToDashboard = () => {
+
+  const navigateToDashboard = ({firstName, lastName}) => {
     navigate("/dashboard", {
       state:
       {
-        email: email
+        email: email,
+        firstName: firstName,
+        lastName: lastName
       }
     });
   };
@@ -30,7 +33,7 @@ const Login = () => {
         .then(data => {
             if (data.success)
             {
-              navigateToDashboard();
+              navigateToDashboard({ firstName: data.firstName, lastName:data.lastName } );
             }
             else
             {
@@ -43,9 +46,9 @@ const Login = () => {
   return (
     <div>
 
-      <h1 class="calendar-friend-title">Calendar Friend</h1>
+      <h1 className="calendar-friend-title">Calendar Friend</h1>
 
-      <div class="login-box">
+      <div className="login-box">
 
         <LoginForm 
           email={email}

@@ -1,49 +1,82 @@
 import React, {useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 import Dropdown from "../components/Dropdown";
+import NavBar from "../components/Navbar";
 
 const EventDetails = () => {
-  const [availableSlots, setAvailableSlots] = useState([])
+  const [availableDates, setAvailableDates] = useState([])
   const [userSelections, setUserSelections] = useState([])
 
 
   const location = useLocation();
-  const { event, host } = location.state || {};
+  const { email, firstName, lastName, eventId, eventTitle, host } = location.state || {};
 
 
-  useEffect(() => {
-    const fetchSlots = async () => {
-      const response = await fetch(`http://localhost:3000/api/events/${event}`)
-      const data = await response.json()
-      setAvailableSlots(data.events);
+ useEffect(() => {
+    async function fetchData()
+    {
+      try
+      {
+        const[res1] = await Promise.all([
+          fetch("http://localhost:3000/GetEventById", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify( { eventId } )
+          })
+        ]);
+
+        res1.json().then(data => {
+          if (data.success)
+          {
+            const cleanSlots = data.eventSlot.map(event => {
+              const eventSlot = JSON.parse(event);
+              const start = new Date(eventSlot.start);
+              const end = new Date(eventSlot.end);
+
+              const format = {month: 'short', day: 'numeric', hour:'numeric', minute:'2-digit'};
+              const dateFormatted = `${start.toLocaleString('en-US',format)} - ${end.toLocaleString('en-US', format)}`;
+
+              return{dateFormatted};
+            });
+
+            setAvailableDates(cleanSlots);
+          }
+          else
+          {
+            console.log("Could not get event.");
+          }
+        });
+
+      }
+      catch (error)
+      {
+        console.log("Error getting all data.");
+      }
     }
-    fetchSlots()
-   
-  }, [eventId]);
+
+    fetchData();
+  }, []);
 
   const handleSelection = (slot) => {
     setUserSelections([...userSelections, slot]);
   };
 
   const submitAvailability = async () => {
-    await fetch("http://localhost:3000/api/availability", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ eventId, availableTimes: userSelections }),
-    })
   };
 
   return (
     <div>
 
-      <h1> Event Title: {event} </h1>
+      <NavBar email={email} firstName={firstName} lastName={lastName}/>
+
+      <h1> Event Title: {eventTitle} </h1>
       <h1> Event Host: {host} </h1>
 
       <h2>Select Available Times</h2>
 
-      <Dropdown slots={availableSlots} />
+      <Dropdown slots={availableDates} />
 
-      <button onClick={submitAvailability}>Submit Availability</button>
+      <button className="btn-1" onClick={submitAvailability}>Submit Availability</button>
 
     </div>
   )
