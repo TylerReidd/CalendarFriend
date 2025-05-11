@@ -41,29 +41,29 @@ const Login = () => {
     };
 
   return (
-      <div>
+    <div>
 
-        <h1 class="calendar-friend-title">Calendar Friend</h1>
+      <h1 class="calendar-friend-title">Calendar Friend</h1>
 
-        <div class="login-box">
+      <div class="login-box">
 
-          <LoginForm 
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            handleSubmit={handleSubmit}
-            errorMessage={errorMessage}
-          />
+        <LoginForm 
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          handleSubmit={handleSubmit}
+          errorMessage={errorMessage}
+        />
 
-          <div>
-            <p>Dont have an account?</p>
-            <a href='/register'>Sign-Up</a>
-          </div>
-
+        <div>
+          <p>Dont have an account?</p>
+          <a href='/register'>Sign-Up</a>
         </div>
 
       </div>
-    )
-  }
+
+    </div>
+  )
+}
 export default Login;

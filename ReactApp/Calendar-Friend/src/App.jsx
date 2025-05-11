@@ -1,9 +1,6 @@
 import React from 'react'
-// import { useState } from 'react'
-
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css'
-
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import CreateEvent from './pages/CreateEvent';
 import Login from './pages/Login';
@@ -14,8 +11,9 @@ import EventDetails from './pages/EventDetails';
 
 const App = () => {
   return (
-    <Router>
+
       <Routes>
+
         <Route path="/" element={<Navigate to="/login" />} />
 
         <Route path="/login" element={<Login/>} />
@@ -29,7 +27,6 @@ const App = () => {
         <Route path="/eventdetails" element={<EventDetails/>} />
 
       </Routes>
-    </Router>
   )
 }
 
