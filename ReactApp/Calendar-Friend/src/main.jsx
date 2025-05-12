@@ -7,7 +7,7 @@ createRoot(document.getElementById('root')).render
 (
   //<StrictMode>
 
-    <BrowserRouter basename="/Calendar-Friend">
+    <BrowserRouter basename="/CalendarFriend">
 
       <App/>
 
