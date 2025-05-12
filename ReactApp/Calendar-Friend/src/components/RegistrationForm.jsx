@@ -1,6 +1,7 @@
 
-
 const RegistrationForm = ({email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, confirmPassword, setConfirmPassword, handleSubmit, errorMessage}) => {
+
+
 
   return (
         <form
@@ -51,7 +52,7 @@ const RegistrationForm = ({email, setEmail, firstName, setFirstName, lastName, s
     
             <label>Confirm Password:</label> 
             <input 
-              className="input-2" 
+              className="input-with-label" 
               type="password" 
               id="confirmPasswordField"
               name="confirmPasswordField" 
@@ -64,10 +65,7 @@ const RegistrationForm = ({email, setEmail, firstName, setFirstName, lastName, s
               <button class="btn-1" type="submit" id="submit" name="submit">Create Account</button>
 
               {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
-            <div>
 
-                <a style={{display: "flex", justifyContent: "center",alignItems: "center", paddingTop: "6px"}}href="Login.html"> Return to Login Page </a>
-            </div>
         </form>
  
   )

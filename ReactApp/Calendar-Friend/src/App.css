@@ -249,7 +249,7 @@ body
   align-items: center;
   justify-content: center;
   
-  padding: 2% 30%;
+  padding: 4% 30%;
 	width: auto;
 	height: auto;
   
@@ -413,8 +413,7 @@ body
 {
   display: flex;
   flex-direction: column;
-  padding: 8%;
-  margin: 8%;
+  padding: 10%;
   width: auto;
   height: auto;
 }

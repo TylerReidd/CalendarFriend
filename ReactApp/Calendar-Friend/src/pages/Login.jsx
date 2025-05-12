@@ -21,6 +21,18 @@ const Login = () => {
     });
   };
 
+  const navigateToRegister = () => {
+    navigate("/register", {
+      state:
+      {
+      }
+    });
+  };
+
+  const handleSignUp = () => {
+    navigateToRegister();
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -60,8 +72,8 @@ const Login = () => {
         />
 
         <div>
-          <p>Dont have an account?</p>
-          <a href='/register'>Sign-Up</a>
+          <p>Don't have an account?</p>
+         <button onClick={handleSignUp}>Sign-Up</button>
         </div>
 
       </div>

@@ -69,7 +69,7 @@ const EventCard = ({email, firstName, lastName, eventId, eventTitle, host}) => {
       </div>
 
       <div className="eventCardButtons" id="eventCardButtons">
-        <button onClick={() => navigateToEventDetails()} className="eventCardViewDetailsButton">View Event Details</button>
+        <button onClick={() => navigateToEventDetails()} className="eventCardViewDetailsButton">Accept/View Event</button>
 
         <button onClick={() => declineEvent()} className="eventCardViewDetailsButton"> Decline Event </button>
       </div>
